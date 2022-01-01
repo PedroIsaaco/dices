@@ -22,14 +22,15 @@ file_name = "diceroll_reduced"
 #csv: https://realpython.com/python-csv/
 print_current_time("starting ...")
 #create data
-csv_data_file = create_random_dataset(100, file_path, file_name)
+csv_data_file = "diceroll_reduced_rnd.csv"#create_random_dataset(10, file_path, file_name)
 print_current_time("data created.")
 #read data
+print_current_time("loading file '%s'" %(csv_data_file))
 dices_data = pd.read_csv(csv_data_file)
 print_current_time("files loaded.")
 
 #process data
-max_columns = 10000
+max_columns = 100000
 dices_features = []
 for i in range(0, max_columns - 1):
     dices_features += [str(i)]
