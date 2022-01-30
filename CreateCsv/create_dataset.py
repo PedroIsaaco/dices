@@ -1,7 +1,7 @@
 import glob
 import csv
 import numpy as np
-from bmp_image import BmpImage
+from createcsv.bmp_image import BmpImage
 
 def create_single_line_dataset(bmp_file, include_value):
     bmp_image_obj = BmpImage(bmp_file)

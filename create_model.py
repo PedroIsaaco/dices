@@ -4,7 +4,7 @@ from sklearn.tree import DecisionTreeRegressor
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_absolute_error
 from datetime import datetime
-from create_dataset import create_random_dataset
+from createcsv.create_dataset import create_random_dataset
 
 def check_set(given_set, set_label):
     print("checking label '%s':" %(set_label))
@@ -40,7 +40,7 @@ file_name = "diceroll_reduced"
 #csv: https://realpython.com/python-csv/
 print_current_time("starting ...")
 #create data
-csv_data_file = "diceroll_reduced_rnd.csv"#create_random_dataset(10, file_path, file_name)
+csv_data_file = "./csv/diceroll_reduced_rnd.csv"#create_random_dataset(10, file_path, file_name)
 print_current_time("data created.")
 #read data
 print_current_time("loading file '%s'" %(csv_data_file))
