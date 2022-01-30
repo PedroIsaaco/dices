@@ -1,5 +1,5 @@
-class JpgDataObject:
-    def __init__(self, filename_jpg, filename_xml, x1, y1, x2, y2, label):
+class ImgDataObject:
+    def __init__(self, filename_img, filename_xml, x1, y1, x2, y2, label):
         dist_x = abs(int(x2) - int(x1))
         dist_y = abs(int(y2) - int(y1))
         if dist_x < dist_y:
@@ -15,7 +15,7 @@ class JpgDataObject:
             self.x2 = int(x2) - offset
             self.y2 = int(y2)
 
-        self.filename_jpg = filename_jpg
+        self.filename_jpg = filename_img
         self.filename_xml = filename_xml
         self.label = label
 

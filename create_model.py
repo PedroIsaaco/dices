@@ -4,7 +4,7 @@ from sklearn.tree import DecisionTreeRegressor
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_absolute_error
 from datetime import datetime
-from process_image import create_random_dataset
+from create_dataset import create_random_dataset
 
 def check_set(given_set, set_label):
     print("checking label '%s':" %(set_label))

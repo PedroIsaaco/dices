@@ -1,8 +1,7 @@
-import glob
 import os
 import xml.dom.minidom
 from xml.dom.minidom import parse
-from data_object import JpgDataObject
+from jpg_data_object import ImgDataObject
 from PIL import Image
 
 def get_region(file_path, x1, y1, x2, y2):
@@ -40,7 +39,7 @@ def get_xml_file(file_path_jpg):
     #print('Mapping %s to %s' % (file_path_jpg, new_file_name))
     return new_file_name
 
-def get_object_info(file_path_jpg, file_path_xml, total_max):
+def get_object_info(file_path_img, file_path_xml, total_max):
     DOMTree = xml.dom.minidom.parse(file_path_xml)
     collection = DOMTree.documentElement
     result_arr = []
@@ -60,25 +59,6 @@ def get_object_info(file_path_jpg, file_path_xml, total_max):
             if abs(int(xmax) - int(xmin)) > total_max:
                 total_max = abs(int(xmax) - int(xmin))
         
-        jpg_data_obj = JpgDataObject(file_path_jpg, file_path_xml, xmin, ymin, xmax, ymax, label)
+        jpg_data_obj = ImgDataObject(file_path_img, file_path_xml, xmin, ymin, xmax, ymax, label)
         result_arr.append(jpg_data_obj)
     return result_arr, total_max
-
-every_obj = []
-base_dir = './Images/target/'
-output_dir = './Images/target_output/'
-file_filter = '*.jpg'
-full_path = '%s%s' % (base_dir, file_filter)
-total_max = 0
-for jpg_file in glob.glob(full_path):
-    xml_file = get_xml_file(jpg_file)
-    result, total_max = get_object_info(jpg_file, xml_file, total_max)
-    every_obj.extend(result)
-
-if not(os.path.isdir(output_dir)):
-    os.mkdir(output_dir)
-
-for obj in every_obj:
-    create_image(obj, output_dir, total_max)
-    #obj.output()
-print('Found %d objects in total' % len(every_obj))
