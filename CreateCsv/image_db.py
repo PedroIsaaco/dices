@@ -1,7 +1,7 @@
 import os
 import xml.dom.minidom
 from xml.dom.minidom import parse
-from jpg_data_object import ImgDataObject
+from .img_data_object import ImgDataObject
 from PIL import Image
 
 def get_region(file_path, x1, y1, x2, y2):

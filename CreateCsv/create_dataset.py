@@ -3,7 +3,15 @@ import csv
 import numpy as np
 from bmp_image import BmpImage
 
-def create_random_dataset(max, bmp_dir, filename):
+def create_single_line_dataset(bmp_file, include_value):
+    bmp_image_obj = BmpImage(bmp_file)
+    if include_value:
+        file_bmp_data = [bmp_image_obj.value] + bmp_image_obj.bmp_data
+    else:
+        file_bmp_data = bmp_image_obj.bmp_data
+    return file_bmp_data
+
+def create_random_dataset(max, bmp_dir, filename, include_value):
     header_written = False
     file_count = len(glob.glob(bmp_dir))
     rnd_numbers = np.random.randint(0, file_count, max)
@@ -13,7 +21,10 @@ def create_random_dataset(max, bmp_dir, filename):
             bmp_file = glob.glob(bmp_dir)[file_index]
             #print("writing file '%s' (at index %d) to file '%s'" %(bmp_file, file_index, outfile))
             bmp_image_obj = BmpImage(bmp_file)
-            file_bmp_data = [bmp_image_obj.value] + bmp_image_obj.bmp_data
+            if include_value:
+                file_bmp_data = [bmp_image_obj.value] + bmp_image_obj.bmp_data
+            else:
+                file_bmp_data = bmp_image_obj.bmp_data
             length = len(file_bmp_data)
             if not header_written:
                 print("writing column headers ...")
