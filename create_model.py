@@ -4,7 +4,7 @@ from sklearn.tree import DecisionTreeRegressor
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_absolute_error
 from datetime import datetime
-from createcsv.create_dataset import create_random_dataset
+from createcsv.create_dataset import create_single_line_dataset
 
 def check_set(given_set, set_label):
     print("checking label '%s':" %(set_label))
@@ -66,6 +66,15 @@ check_set(val_y, "val_y")
 print_current_time("model trained.")
 for max_leaf_nodes in [5, 50, 500, 5000]:
     my_mae = get_mae(max_leaf_nodes, train_X, val_X, train_y, val_y)
-    print("Max leaf nodes: %d  \t\t Mean Absolute Error:  %d" %(max_leaf_nodes, my_mae))
+    print_current_time("Max leaf nodes: %d  \t\t Mean Absolute Error:  %d" %(max_leaf_nodes, my_mae))
+
+test_img = "./test/test_wurf_sml.bmp"
+data = create_single_line_dataset(test_img, False)
+data = [data[0:99999]]
+
+
+model = DecisionTreeRegressor(max_leaf_nodes=500, random_state=0)
+model.fit(X, y)
+preds_val = model.predict(data)
 
 print_current_time("finished.")
